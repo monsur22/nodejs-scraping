@@ -3,3 +3,4 @@ https://www.freecodecamp.org/news/how-to-scrape-websites-with-node-js-and-cheeri
 https://www.zenrows.com/blog/web-scraping-with-javascript-and-nodejs#scraping-the-basics
 https://www.digitalocean.com/community/tutorials/how-to-scrape-a-website-using-node-js-and-puppeteer
 http://books.toscrape.com/
+https://oxylabs.io/blog/playwright-web-scraping
