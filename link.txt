@@ -1,8 +1,0 @@
-https://www.otomoto.pl/ciezarowe/uzytkowe/mercedes-benz/od-+2014/q-actros?search%5Bfilter_enum_damaged%5D=0&search%5Border%5D=created_at+%3Adesc
-https://www.freecodecamp.org/news/how-to-scrape-websites-with-node-js-and-cheerio/
-https://www.zenrows.com/blog/web-scraping-with-javascript-and-nodejs#scraping-the-basics
-https://www.digitalocean.com/community/tutorials/how-to-scrape-a-website-using-node-js-and-puppeteer
-http://books.toscrape.com/
-https://oxylabs.io/blog/playwright-web-scraping
-
-https://stackoverflow.com/questions/61138617/node-js-cheerio-scraping-div-id
