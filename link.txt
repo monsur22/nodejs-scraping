@@ -4,3 +4,5 @@ https://www.zenrows.com/blog/web-scraping-with-javascript-and-nodejs#scraping-th
 https://www.digitalocean.com/community/tutorials/how-to-scrape-a-website-using-node-js-and-puppeteer
 http://books.toscrape.com/
 https://oxylabs.io/blog/playwright-web-scraping
+
+https://stackoverflow.com/questions/61138617/node-js-cheerio-scraping-div-id
