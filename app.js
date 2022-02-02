@@ -18,35 +18,38 @@ async function getNextPageUrl () {
 
 // 3. Add addItems function that fetches item urls + item ids (unique ids that the portal uses) from list page
 async function addItems () {
-    const browser = await playwright.chromium.launch();
-    const page = await browser.newPage();
-    await page.goto(URL);
-    const elemHandle = await page.$('article');
-
-    // const idAttr = await page.evaluate(el => el.id, elemHandle);
-    // console.log(idAttr);
-
-    const cars = await page.$$eval('.e1b25f6f18', all_items => {
-        const data = [];
-        all_items.forEach(car => {
-            // const id = car.evaluate(el => el.id)
-            // const name = car.querySelector('h2').innerText;
-            const link = car.querySelector('h2 > a').href;
-            data.push({
-                // id,
-                // name,
-                link
-            });
-        });
-        return data;
+    const browser = await playwright.chromium.launch({
+        headless: false
     });
-    console.log(cars);
-    var k = JSON.parse(JSON.stringify(cars));
-    // console.log(k.length);
 
+    const page = await browser.newPage();
+    await page.goto('https://www.otomoto.pl/ciezarowe/uzytkowe/mercedes-benz/ od-2014/q-actros? search%5Bfilter_enum_damaged%5D=0&search%5Border%5D=created_at %3Adesc');
+
+    const id = await page.$eval('xpath=//html/body/div[1]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[3]/main',
+        navElm => {
+            let refs = []
+            let atags = navElm.getElementsByTagName("article");
+            for (let item of atags) {
+                refs.push(item.id);
+            }
+            return refs;
+    });
+    const link = await page.$$eval('.e1b25f6f18', all_items => {
+            const data = [];
+            all_items.forEach(car => {
+                const link = car.querySelector('h2 > a').href;
+                data.push({
+                    link
+                });
+            });
+            return data;
+    });
+
+    console.log('ID', id);
+    console.log('Link', link);
+    await page.waitForTimeout(5000); // wait
     await browser.close();
 }
-
 // 4. Add getTotalAdsCount function - shows how many total ads exist for the provided initial url
 async function getTotalAdsCount  () {
     const browser = await playwright.chromium.launch();
@@ -71,26 +74,26 @@ async function getTotalAdsCount  () {
 // 5. Add scrapeTruckItem function - that scrapes the actual ads and parses into the format: item id, title, price, registration date, production date, mileage, power
 
 async function scrapeTruckItem () {
-    const rp = require('request-promise');
-    const cheerio = require("cheerio");
-    const url = 'https://www.otomoto.pl/oferta/mercedes-benz-ciagnik-siodlowy-actros-1843-ls-ciagnik-siodlowy-mercedes-benz-actros-1843-ls-ID6Enf3j.html';
-    const { data } = await axios.get(url);
-    // Load HTML we fetched in the previous line
-    const $ = cheerio.load(data);
-    rp(url)
-    .then(function(html) {
-        console.log('ID:',$('.offer-meta #ad_id', html).text());
-        console.log('Title:',$('.fake-title', html).text());
-        console.log('Price:',$('.offer-price__number', html).text());
-        // console.log($('.bday', html).text());
-    })
-    .catch(function(err) {
-        //handle error
-    });
+    // const rp = require('request-promise');
+    // const cheerio = require("cheerio");
+    // const url = 'https://www.otomoto.pl/oferta/mercedes-benz-ciagnik-siodlowy-actros-1843-ls-ciagnik-siodlowy-mercedes-benz-actros-1843-ls-ID6Enf3j.html';
+    // const { data } = await axios.get(url);
+    // // Load HTML we fetched in the previous line
+    // const $ = cheerio.load(data);
+    // rp(url)
+    // .then(function(html) {
+    //     console.log('ID:',$('.offer-meta #ad_id', html).text());
+    //     console.log('Title:',$('.fake-title', html).text());
+    //     console.log('Price:',$('.offer-price__number', html).text());
+    //     // console.log($('.bday', html).text());
+    // })
+    // .catch(function(err) {
+    //     //handle error
+    // });
 }
 
 // 6 Scrape all pages, all ads
-// const { chromium } = require('playwright');
+
 
 async function Scrape_all_pages() {
     const { chromium } = require('playwright');
