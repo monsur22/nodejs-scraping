@@ -167,7 +167,7 @@ async function Scrape_all_pages() {
 // function to wait a while
 function delay(time) {
 	return new Promise(function (resolve) {
-		setTimeout(resolve, time)
+		setTimeout(resolve, time) 
 	});
 }
 
